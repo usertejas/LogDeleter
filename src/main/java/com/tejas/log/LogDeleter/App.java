@@ -46,7 +46,7 @@ public class App
   //   File f = new File("D:\\infra.2016-07-30-23-12.log.gz");
      File f = new File("D:/ProgramData");
      File[] kj = f.listFiles();
-     File k = kj[1];
+     File k = kj[0];
     System.out.println(fileCheck.canbeDeleted(k, rhse.getLogDetails()));
     if(fileCheck.canbeDeleted(k, rhse.getLogDetails())){
     	System.out.println("Deleting file");
