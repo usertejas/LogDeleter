@@ -17,7 +17,8 @@ public class fileCheck {
 
 	//private String fileName;
 	private final static DateTime todaysDate = new DateTime();
-	private final static String pattern ="^([\\w\\-]+).((\\d\\d-\\d\\d-\\d\\d)|(\\d\\d\\d\\d-\\d\\d-\\d\\d))-\\d\\d-\\d\\d.log.gz";
+//	private final static String pattern ="^([\\w\\-]+).((\\d\\d-\\d\\d-\\d\\d)|(\\d\\d\\d\\d-\\d\\d-\\d\\d))-\\d\\d-\\d\\d.log.gz";
+	private final static String pattern ="^([\\w\\-]+).((\\d\\d-\\d\\d-\\d\\d)|(\\d\\d\\d\\d-\\d\\d-\\d\\d))(.*)";
 	
 	static public boolean canbeDeleted(File filetoCheck, HashMap<String, Integer> logretention  ){
 		System.out.println(filetoCheck.getName());
@@ -31,7 +32,7 @@ public class fileCheck {
       	      SimpleDateFormat fileDate2 = new SimpleDateFormat("yyyy-MM-dd");
       	      String logFilename= m.group(1);
       	      
-      	      int renetiontime = logretention.get(logFilename);
+      	      int renetiontime = new LogRetention().findRetensionPeriod(logretention, logFilename);
       	      
       	      String logFileDate = m.group(2);
       	      
@@ -45,7 +46,7 @@ public class fileCheck {
       					     //Find Date differnce
       					     int time = Days.daysBetween(dt,todaysDate).getDays();
       					     System.out.println("Day differnce-:"+time);
-      					             if(renetiontime<time){
+      					             if(renetiontime<=time){
       					            	 return true;
       					             }else{
       					            	 return false;
@@ -69,7 +70,7 @@ public class fileCheck {
      					     //Find Date differnce
      					     int time = Days.daysBetween(dt,todaysDate).getDays();
      					    System.out.println("Day differnce"+time);
-     					              if(renetiontime<time){
+     					              if(renetiontime<=time){
      					    	        return true;
      					              }else{
      					            	return false;

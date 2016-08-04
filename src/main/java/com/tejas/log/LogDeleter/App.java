@@ -21,38 +21,47 @@ public class App
         
         Application rhse = new Application();
         rhse.setAppicationName("rhse");
-        rhse.setLogSource("/log/rhse");
+       // /* 
+             rhse.setLogSource("/Users/tpatil/logs/rhse");
         ArrayList<String> servernameforRHSE = new ArrayList<String>();
-        servernameforRHSE.add("RHSE-401");
-        servernameforRHSE.add("RHSE-402");
+       servernameforRHSE.add("rhse-001");
+        servernameforRHSE.add("rhse-402");
         servernameforRHSE.add("RHSE-403");
-        rhse.setAppicationServer(servernameforRHSE);
+   
         HashMap<String, Integer> rhseLogDetails = new HashMap<String, Integer>();
-        rhseLogDetails.put("infra",	 7);
-        rhseLogDetails.put("pl_timing",	365);
-        rhseLogDetails.put("tomcat", 0);
         
+        rhseLogDetails.put("INIFILE	",	 1);
+        rhseLogDetails.put("TokenDetails",	 1);
+        
+        
+        rhseLogDetails.put("enet_http_headers",	 1);
+        rhseLogDetails.put("booking_pl_timings",	1);
+        rhseLogDetails.put("booking_parse_failures", 1);
+        rhseLogDetails.put("agoda_pl_timings", 1);
+        rhseLogDetails.put("enet_http_failures", 1);
+        rhseLogDetails.put("enet_pl_timings", 1);
+        rhseLogDetails.put("hotel", 1);
+        rhseLogDetails.put("gdsstatsrequest",1);
+        rhseLogDetails.put("gdsstats",1);
+        rhseLogDetails.put("pegs_pl_timings",1);
+        rhseLogDetails.put("pegs_parse_failures", 1);
+        rhseLogDetails.put("room_description",1 );
+        rhseLogDetails.put("sql",1 );
+        rhseLogDetails.put("slow_sql",1 );
+        rhseLogDetails.put("searchstats", 1);
+        rhseLogDetails.put("tourico_pl_timings", 1);
+        rhseLogDetails.put("WSMQ_Server", 1);
+        rhseLogDetails.put("WSMQ_Discard", 1);
+        rhseLogDetails.put("pegs_parse_failures", 1);
+        
+  
+        rhse.setAppicationServer(servernameforRHSE);
         rhse.setLogDetails(rhseLogDetails);
         
-        
-     System.out.println(  LogRetention.findRetensionPeriod(rhseLogDetails, "infra"));
-        
-     System.out.println(  LogRetention.findRetensionPeriod(rhseLogDetails, "pl_timing"));
-     System.out.println(  LogRetention.findRetensionPeriod(rhseLogDetails, "tomcat"));
-     System.out.println(  LogRetention.findRetensionPeriod(rhseLogDetails, "isdf"));
+      
+         new logDeleter(rhse).logdeleter();
      
-     
- //    File f = new File("D:\\infra.16-07-30-23-12.log.gz");
-  //   File f = new File("D:\\infra.2016-07-30-23-12.log.gz");
-     File f = new File("D:/ProgramData");
-     File[] kj = f.listFiles();
-     File k = kj[0];
-    System.out.println(fileCheck.canbeDeleted(k, rhse.getLogDetails()));
-    if(fileCheck.canbeDeleted(k, rhse.getLogDetails())){
-    	System.out.println("Deleting file");
-    k.delete();
+  
     }
-    System.out.println("file");
-        
-    }
+    
 }
